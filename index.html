@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Te Invito A Una Cita</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gradient-background {
+      background: rgb(208, 214, 255);
+      background: linear-gradient(180deg, rgb(189, 183, 107) 0%, rgb(255, 255, 255) 36%, rgb(189, 183, 107) 100%);
+    }
+
+    @keyframes bounce2 {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body class="gradient-background">
+  <div class="flex items-center justify-center h-screen">
+    <div class="flex flex-col items-center p-4">
+      <h2 id="citaQuestion" class="text-4xl font-bold italic text-[#B8860B] my-4">¿Queres ir a merendar conmigo? </h2>
+      <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
+        <button id="SiButton"
+          class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium disabled:pointer-events-none disabled:opacity-50 hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition">
+          Si
+        </button>
+        <button id="noButton"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium transition disabled:pointer-events-none disabled:opacity-50 hover:bg-red-700 h-12 min-w-[75px] w-auto px-4 py-2 bg-red-500 text-white">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    const SiButton = document.getElementById('SiButton');
+    const noButton = document.getElementById('noButton');
+    const citaQuestion = document.getElementById('citaQuestion');
+    const responseButtons = document.getElementById('responseButtons');
+  
+    let noClickCount = 0;
+    let buttonHeight = 48;
+    let buttonWidth = 80;
+    let fontSize = 20;
+  
+   noButton.addEventListener('click', function() {
+  if (noClickCount < 5) {
+    noClickCount++;
+    buttonHeight += 35;
+    buttonWidth += 35;
+    fontSize += 25;
+    SiButton.style.height = `${buttonHeight}px`;
+    SiButton.style.width = `${buttonWidth}px`;
+    SiButton.style.fontSize = `${fontSize}px`;
+    noButton.textContent = [
+      "No",
+      "¿Estás segura??",
+      "Dale, no seas mala",
+      "La vas a pasar bien",
+      "¿Por qué seguís apretando que no??",
+      "No tenés otra opción."
+    ][noClickCount];
+  }
+});
+  
+    SiButton.addEventListener('click', () => {
+      citaQuestion.textContent = "Espero que hayas apretado si de una :))"; 
+      responseButtons.style.display = 'none'; //
+    });
+  </script>  
+</body>
+</html>
